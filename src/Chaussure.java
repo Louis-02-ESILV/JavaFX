@@ -8,7 +8,7 @@ public class Chaussure extends Produit{
     }
 
     private int pointure;
-    public Chaussure(String nom,int prix, int nbex, int pointure){
+    public Chaussure(String nom,double prix, int nbex, int pointure){
         super(nom,prix,nbex);
         if(pointure >= 36 && pointure<= 50){
             this.pointure=pointure;

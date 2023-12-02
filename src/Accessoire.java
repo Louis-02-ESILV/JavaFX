@@ -1,5 +1,5 @@
 public class Accessoire extends Produit{
-    public Accessoire(String nom, int prix, int nbex){
+    public Accessoire(String nom, double prix, int nbex){
         super(nom,prix,nbex);
     }
     @Override

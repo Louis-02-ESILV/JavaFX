@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Produit {
     private static AtomicInteger count = new AtomicInteger(0);
     private int id;
-    private int prix;
+    private double prix;
     private String nom;
     private int nbex;
     private static int recette=0;
@@ -18,7 +18,7 @@ public class Produit {
         this.nom = nom;
     }
 
-    public Produit(String nom, int prix, int nbex){
+    public Produit(String nom, double prix, int nbex){
         this.nom=nom;
         if(prix >0)
         {this.prix=prix;}
@@ -34,7 +34,7 @@ public class Produit {
     public void setNbex(int nbex) {
         this.nbex = nbex;
     }
-    public int getPrix() {
+    public double getPrix() {
         return prix;
     }
     public void setPrix(int prix) {
