@@ -2,7 +2,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProduitDAO {
+public class ProduitDAO {//Produit Data Access Object par nomenclature
     private static final String URL = "jdbc:mysql://localhost:3306/store";
     private static final String UTILISATEUR = "root";
     private static final String MOT_DE_PASSE = "root";

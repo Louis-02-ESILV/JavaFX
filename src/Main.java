@@ -13,14 +13,14 @@ public class Main {
         produits.get(0).Vendre(6);
         produitDAO.mettreAJourProduit(produits.get(0));
         System.out.println(produits.get(0).toString());
-        /*Initiliser des produits basiques :
-        produitDAO.supprimerTousLesProduits();
-        Vetement jean = new Vetement( "Jean", 29.99, 50, 38);
+        /*Initilis Vetement( "Jean", 29.99, 50, 38);
         produitDAO.ajouterProduit(jean);
         Chaussure sandales = new Chaussure( "Sandales", 29.99, 50, 38);
         produitDAO.ajouterProduit(sandales);
         Accessoire sac = new Accessoire("Sac",50,2);
-        produitDAO.ajouterProduit(sac);
+        produitDAO.ajouterProduit(sac);er des produits basiques :
+        produitDAO.supprimerTousLesProduits();
+        Vetement jean = new
          */
     }
 }
