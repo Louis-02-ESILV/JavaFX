@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox prefHeight="400.0" prefWidth="685.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.womenshop.GestionController">
+    <children>
+      <MenuBar fx:id="Menu">
+         <menus>
+            <Menu mnemonicParsing="false" text="Gestion">
+               <items>
+                  <MenuItem fx:id="MenuAchat" mnemonicParsing="false" onAction="#OnClick_Achat" text="Achat" />
+                  <MenuItem fx:id="MenuStock" mnemonicParsing="false" onAction="#OnClick_Vente" text="Vente" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Capital">
+               <items>
+                  <MenuItem fx:id="Finance" mnemonicParsing="false" onAction="#OnClickFinance" text="Finance" />
+                  <MenuItem fx:id="Stock" mnemonicParsing="false" onAction="#OnClick_Stock" text="Stock" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <HBox alignment="TOP_CENTER" prefHeight="11.0" prefWidth="640.0">
+         <children>
+            <Text fx:id="Text" strokeType="OUTSIDE" strokeWidth="0.0" text="Information to add the product" />
+         </children>
+      </HBox>
+      <HBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="756.0">
+         <children>
+            <VBox prefHeight="100.0" prefWidth="166.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Produit" textAlignment="CENTER" wrappingWidth="108.13671875" />
+                   <ChoiceBox fx:id="ProductType" onAction="#TypeSelected" prefWidth="150.0">
+                       <items>
+                           <FXCollections fx:factory="observableArrayList">
+                               <String fx:value="Vêtement" />
+                               <String fx:value="Accessoire" />
+                               <String fx:value="Chaussure" />
+                           </FXCollections>
+                       </items>
+                   </ChoiceBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="100.0" prefWidth="102.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID" textAlignment="CENTER" wrappingWidth="108.13671875" />
+                  <TextField fx:id="IDArea" alignment="BOTTOM_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="170.0" />
+               </children>
+            </VBox>
+            <VBox prefHeight="100.0" prefWidth="195.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nom" textAlignment="CENTER" wrappingWidth="108.13671875" />
+                  <TextField fx:id="NameArea" />
+               </children>
+            </VBox>
+            <VBox prefHeight="100.0" prefWidth="134.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Stock" textAlignment="CENTER" wrappingWidth="108.13671875" />
+                  <TextField fx:id="StockArea" />
+               </children>
+            </VBox>
+            <VBox fx:id="SizeBox1" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="177.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Prix" textAlignment="CENTER" wrappingWidth="108.13671875" />
+                  <TextField fx:id="PriceArea" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="170.0" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <VBox fx:id="SizeBox" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" visible="false">
+               <children>
+                  <Text fx:id="SizeText" strokeType="OUTSIDE" strokeWidth="0.0" text="Pointure" textAlignment="CENTER" wrappingWidth="108.13671875" />
+                  <TextField fx:id="SizeArea" alignment="BOTTOM_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="170.0" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="48.0" prefWidth="640.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#OnCLick_Validation" text="Validate" />
+                  <Text fx:id="Label_Validation_Test" strokeType="OUTSIDE" strokeWidth="0.0" text=" " />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+    </children>
+</VBox>
