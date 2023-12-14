@@ -59,51 +59,7 @@ public class CapitalController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         produitDAO = new ProduitDAO();
         produits = produitDAO.obtenirTousLesProduits();
-        CategoryAxis xAxis = new CategoryAxis();
-        NumberAxis yAxis = new NumberAxis();
 
-        BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
-        barChart.setTitle("Product Quantity");
-
-        Map<String, XYChart.Series<String, Number>> seriesMap = new HashMap<>();
-        Map<String, String> colorMap = Map.of(
-                "Vetement", "red",
-                "Chaussure", "blue",
-                "Accessoire", "green"
-        );
-
-        for (String type : colorMap.keySet()) {
-            XYChart.Series<String, Number> series = new XYChart.Series<>();
-            series.setName(type);
-            seriesMap.put(type, series);
-        }
-
-        for (Produit produit : produits) {
-            String productType = "";
-            if (produit instanceof Vetement) {
-                productType = "Vetement";
-            } else if (produit instanceof Chaussure) {
-                productType = "Chaussure";
-            } else if (produit instanceof Accessoire) {
-                productType = "Accessoire";
-            }
-
-            XYChart.Series<String, Number> series = seriesMap.get(productType);
-            if (series != null) {
-                series.getData().add(new XYChart.Data<>(produit.getNom(), produit.getNbex()));
-            }
-        }
-
-        barChart.getData().addAll(seriesMap.values());
-
-// Customize the color of each series
-        for (String type : seriesMap.keySet()) {
-            Node node = seriesMap.get(type).getNode();
-            String color = colorMap.get(type);
-            if (node != null && color != null) {
-                node.setStyle("-fx-bar-fill: " + color + ";");
-            }
-        }
     }
 
     @FXML

@@ -6,28 +6,35 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.css.converter.StringConverter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 
 public class StockController implements Initializable {
@@ -93,9 +100,18 @@ public class StockController implements Initializable {
     @FXML
     private TableColumn<Produit, Integer> stockTaille;
     @FXML
-    private TableColumn<Produit,String> typeProduitColumn;
+    private TableColumn<Produit, String> typeProduitColumn;
     @FXML
     private TableColumn<Produit, Void> modifierStockColumn;
+    @FXML
+    private BarChart<String, Number> barChart;
+    @FXML
+    private CategoryAxis xAxis;
+
+    @FXML
+    private NumberAxis yAxis;
+    @FXML
+    private VBox legendBox;
 
 
     @FXML
@@ -140,7 +156,54 @@ public class StockController implements Initializable {
                 }
             }
         });
+        Update_Chart();
     }
+    public void Update_Chart() {
+        // Clear existing data in the bar chart
+        barChart.getData().clear();
+
+        Map<Class<? extends Produit>, List<Produit>> groupedProducts = produits.stream()
+                .collect(Collectors.groupingBy(Produit::getClass));
+
+        for (Map.Entry<Class<? extends Produit>, List<Produit>> entry : groupedProducts.entrySet()) {
+            XYChart.Series<String, Number> series = new XYChart.Series<>();
+            Class<? extends Produit> productType = entry.getKey();
+
+            String color;
+            if (productType.equals(Vetement.class)) {
+                color = "red";
+            } else if (productType.equals(Accessoire.class)) {
+                color = "blue";
+            } else if (productType.equals(Chaussure.class)) {
+                color = "green";
+            } else {
+                color = "black"; // Default color if no match is found
+            }
+
+            for (Produit produit : entry.getValue()) {
+                XYChart.Data<String, Number> data = new XYChart.Data<>(produit.getNom(), produit.getNbex());
+                series.getData().add(data);
+
+                Node node = data.getNode();
+                if (node != null) {
+                    node.setStyle("-fx-bar-fill: " + color + ";");
+                }
+            }
+
+            barChart.getData().add(series);
+            series.setName(productType.getSimpleName()); // Set series name for legend
+        }
+
+        // Configure axis labels
+        xAxis.setLabel("Clothing");
+        yAxis.setLabel("Quantity");
+
+        // Add legend to the BarChart
+        barChart.setLegendVisible(true);
+        barChart.setStyle("-fx-bar-fill: black; -fx-font-size: 14px;"); // Increase bar size and font size
+    }
+
+
 
     public void updateTable(List<Produit> produits) {
         ObservableList<Produit> data = FXCollections.observableArrayList(produits);
@@ -177,6 +240,7 @@ public class StockController implements Initializable {
         });
         tableauStock.setItems(data);
         SetIdNewObject();
+        Update_Chart();
     }
     void SetIdNewObject()
     {
