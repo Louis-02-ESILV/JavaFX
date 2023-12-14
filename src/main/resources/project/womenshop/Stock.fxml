@@ -52,20 +52,12 @@
 <VBox prefHeight="400.0" prefWidth="685.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.womenshop.StockController">
     <children>
       <MenuBar fx:id="Menu">
-         <menus>
-            <Menu mnemonicParsing="false" text="Gestion">
-               <items>
-                  <MenuItem fx:id="MenuAchat" mnemonicParsing="false" onAction="#OnClick_Achat" text="Achat" />
-                  <MenuItem fx:id="MenuStock" mnemonicParsing="false" onAction="#OnClick_Vente" text="Vente" />
-               </items>
-            </Menu>
             <Menu mnemonicParsing="false" text="Capital">
                <items>
                   <MenuItem fx:id="Finance" mnemonicParsing="false" onAction="#OnClickFinance" text="Finance" />
-                  <MenuItem fx:id="Stock" mnemonicParsing="false" onAction="#OnClick_Stock" text="Stock" />
+                  <MenuItem fx:id="Stock" mnemonicParsing="false" text="Stock" />
                </items>
             </Menu>
-         </menus>
       </MenuBar>
         <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
             <children>

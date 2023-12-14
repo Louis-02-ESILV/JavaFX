@@ -192,37 +192,24 @@ public class StockController implements Initializable {
         }
         IDArea.setText(String.valueOf(availableID));
     }
-    @FXML
-    void OnClick_Achat(ActionEvent event)
-    {
-        try {
-            switchToScene2();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    @FXML
-    void OnClick_Vente()
-    {
-        try {
-            switchToScene2();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+
     @FXML
     void OnClickFinance()
     {
-
+        try {
+            switchToScene2();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     @FXML
     void OnClick_Stock(){
 
     }
     private void switchToScene2() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Gestion.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Capital.fxml"));
         Parent root = loader.load();
-        Stage stage = (Stage) MenuAchat.getParentPopup().getOwnerWindow();
+        Stage stage = (Stage) Stock.getParentPopup().getOwnerWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
