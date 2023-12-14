@@ -50,7 +50,7 @@ public class Produit {
     public void Vendre(int qtt){
         if(this.nbex>=qtt){
             this.nbex-=qtt;
-            recette+=this.prix;
+            recette+=this.prix*qtt;
             System.out.println("Stock modifié avec succès");
         }else{
             throw new IllegalArgumentException("Database.Produit Indisponible");
@@ -63,7 +63,7 @@ public class Produit {
 
     public void Achat(int qtt){
         if (qtt>0){this.nbex+=qtt;
-            recette-=this.prix;}
+            recette-=this.prix*qtt;}
         else{
             System.out.println("Achat négatif !!!");
         }
