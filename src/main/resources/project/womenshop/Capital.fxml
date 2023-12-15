@@ -3,15 +3,14 @@
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
 
-<VBox prefHeight="400.0" prefWidth="685.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.womenshop.CapitalController">
+<VBox prefHeight="494.0" prefWidth="1283.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.womenshop.CapitalController">
     <children>
       <MenuBar fx:id="Menu">
             <Menu mnemonicParsing="false" text="Capital">
@@ -21,20 +20,31 @@
                </items>
             </Menu>
       </MenuBar>
-      <HBox alignment="CENTER" prefHeight="377.0" prefWidth="685.0">
+      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="1345.0" text="Label" fx:id="ToutLabel" />
+      <HBox alignment="CENTER" prefHeight="452.0" prefWidth="1283.0">
          <children>
-            <BarChart fx:id="barChart" prefHeight="285.0" prefWidth="500.0">
-              <xAxis>
-                <CategoryAxis side="BOTTOM" fx:id="xAxis" />
-              </xAxis>
-              <yAxis>
-                <NumberAxis side="LEFT" fx:id="yAxis"/>
-              </yAxis>
-            </BarChart>
-            <VBox fx:id="SizeBox" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" visible="false">
+            <VBox prefHeight="377.0" prefWidth="528.0">
                <children>
-                  <Text fx:id="SizeText" strokeType="OUTSIDE" strokeWidth="0.0" text="Pointure" textAlignment="CENTER" wrappingWidth="108.13671875" />
-                  <TextField fx:id="SizeArea" alignment="BOTTOM_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="170.0" />
+                  <BarChart fx:id="barChart" minWidth="-Infinity" prefHeight="462.0" prefWidth="667.0">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" fx:id="xAxis" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis fx:id="yAxis" side="LEFT" />
+                    </yAxis>
+                  </BarChart>
+               </children>
+            </VBox>
+            <VBox alignment="TOP_RIGHT" minWidth="-Infinity" prefHeight="452.0" prefWidth="615.0">
+               <children>
+                  <BarChart fx:id="barChart1" prefHeight="452.0" prefWidth="584.0">
+                     <xAxis>
+                        <CategoryAxis side="BOTTOM" fx:id="xAxist" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis fx:id="yAxist" side="LEFT" />
+                     </yAxis>
+                  </BarChart>
                </children>
             </VBox>
          </children>

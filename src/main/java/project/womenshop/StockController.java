@@ -1,6 +1,7 @@
 package project.womenshop;
 
 import Database.*;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -34,6 +35,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 
@@ -114,10 +118,13 @@ public class StockController implements Initializable {
     private VBox legendBox;
 
 
+
     @FXML
     private TableView<Produit> tableauStock;
-    private ProduitDAO produitDAO;
+    private static ProduitDAO produitDAO;
     private List<Produit> produits;
+    ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -136,11 +143,12 @@ public class StockController implements Initializable {
                     if (newStock > produit.getNbex()) {
                         produit.Achat(newStock - produit.getNbex());
                     } else {
-                        produit.Vendre(produit.getNbex() - newStock);
+                        produit.Supprimer(produit.getNbex() - newStock);
                     }
                     produitDAO.mettreAJourProduit(produit);
                     updateTable(produitDAO.obtenirTousLesProduits());
                     tableauStock.refresh();
+                    Update_Chart();
                 });
             }
 
@@ -156,13 +164,11 @@ public class StockController implements Initializable {
                 }
             }
         });
-        Update_Chart();
+        Random_Sell();
     }
     public void Update_Chart() {
-        // Clear existing data in the bar chart
         barChart.getData().clear();
-
-        Map<Class<? extends Produit>, List<Produit>> groupedProducts = produits.stream()
+        Map<Class<? extends Produit>, List<Produit>> groupedProducts = produitDAO.obtenirTousLesProduits().stream()
                 .collect(Collectors.groupingBy(Produit::getClass));
 
         for (Map.Entry<Class<? extends Produit>, List<Produit>> entry : groupedProducts.entrySet()) {
@@ -200,7 +206,7 @@ public class StockController implements Initializable {
 
         // Add legend to the BarChart
         barChart.setLegendVisible(true);
-        barChart.setStyle("-fx-bar-fill: black; -fx-font-size: 14px;"); // Increase bar size and font size
+        barChart.setStyle("-fx-bar-fill: black; -fx-font-size: 14px;");
     }
 
 
@@ -265,10 +271,6 @@ public class StockController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-    @FXML
-    void OnClick_Stock(){
-
     }
     private void switchToScene2() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Capital.fxml"));
@@ -364,6 +366,26 @@ public class StockController implements Initializable {
             ValidationLabel.setText("Une erreur est survenue : " + e.getMessage());
         }
         Clear_Text();
+    }
+    public void Random_Sell()
+    {
+        Random random = new Random();
+        executorService.scheduleAtFixedRate(() -> {
+            sellProduct(produits.get(random.nextInt(produits.size())));
+            Platform.runLater(() -> {
+                updateTable(produitDAO.obtenirTousLesProduits());
+            });
+        }, 0, 5, TimeUnit.SECONDS);
+        // To stop the executor service after a certain duration (e.g., 60 seconds)
+        executorService.schedule(() -> executorService.shutdown(), 60, TimeUnit.SECONDS);
+    }
+
+    public static void sellProduct(Produit product) {
+        Random random = new Random();
+        int nbvente = random.nextInt(product.getNbex()/50);
+        System.out.println("produit " + product.getNom() + " pour un total en €" + product.getPrix());
+        product.Vendre(nbvente);
+        produitDAO.mettreAJourProduit(product);
     }
 }
 

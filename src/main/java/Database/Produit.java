@@ -12,7 +12,9 @@ public class Produit {
     private double prix;
     private String nom;
     private int nbex;
-    private static int recette=0;
+    private static double recettetot=0;
+    private double recetteProd = 0;
+    private static double benefice = 0;
 
     public String getNom() {
         return nom;
@@ -35,14 +37,8 @@ public class Produit {
     public int getNbex() {
         return nbex;
     }
-    public void setNbex(int nbex) {
-        this.nbex = nbex;
-    }
     public double getPrix() {
         return prix;
-    }
-    public void setPrix(int prix) {
-        this.prix = prix;
     }
     public int getId() {
         return id;
@@ -50,20 +46,38 @@ public class Produit {
     public void Vendre(int qtt){
         if(this.nbex>=qtt){
             this.nbex-=qtt;
-            recette+=this.prix*qtt;
+            recetteProd+=this.prix*qtt*1.2;
+            benefice+=this.prix*qtt*0.2;
+            recettetot+=this.prix*qtt*1.2;
+            System.out.println("Stock modifié avec succès");
+        }else{
+            throw new IllegalArgumentException("Database.Produit Indisponible");
+        }
+    }
+    public void Supprimer (int qtt)
+    {
+        if(this.nbex>=qtt){
+            this.nbex-=qtt;
             System.out.println("Stock modifié avec succès");
         }else{
             throw new IllegalArgumentException("Database.Produit Indisponible");
         }
     }
 
-    public static int getRecette() {
-        return recette;
+    public static double getRecetteTot() {
+        return recettetot;
     }
-
+    public static double getBenefice() {
+        return benefice;
+    }
+    public double getRecetteProd()
+    {
+        return recetteProd;
+    }
     public void Achat(int qtt){
         if (qtt>0){this.nbex+=qtt;
-            recette-=this.prix*qtt;}
+            recetteProd-=this.prix*qtt;
+            recettetot-=this.prix*qtt;}
         else{
             System.out.println("Achat négatif !!!");
         }

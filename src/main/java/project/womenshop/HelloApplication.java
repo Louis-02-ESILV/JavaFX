@@ -16,7 +16,7 @@ import java.util.List;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Stock.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Capital.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("WomenShop!");
         Image icon = new Image("C:\\Users\\annel\\OneDrive - De Vinci\\cours\\S07\\Oriented Object Developement\\JavaFX\\src\\main\\resources\\logo/icon.png"); // Provide the path to your icon image
